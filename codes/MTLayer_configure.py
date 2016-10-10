@@ -15,6 +15,8 @@ tf.app.flags.DEFINE_string('FEATURE_SIZE', 10,'num of features')
 tf.app.flags.DEFINE_integer('max_steps', int(5e+3), 'Number of steps to run trainer.')
 tf.app.flags.DEFINE_integer('NUM_CLASS', 10, 'Number of class in labels')
 tf.app.flags.DEFINE_integer('L', 3, 'Number of layers')
+tf.app.flags.DEFINE_integer('activation_func', 0, '1: sigmoid function'
+												  '0: tanh function')
 tf.app.flags.DEFINE_float('learning_rate_t', 1e-3, 'learning rate for first hidden layers')
 tf.app.flags.DEFINE_float('l2_reg_para', 1e-3, 'regularization parameter ')
 tf.app.flags.DEFINE_bool('print_grad', False, 'rate for training dataset')

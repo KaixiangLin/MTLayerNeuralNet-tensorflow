@@ -170,7 +170,8 @@ def run_training(dataset_tuple):
 
         hidden_last, regularizers = models.inference(placeholder_tuple,
                                                      FLAGS.hidden_units,
-                                                     FLAGS.FEATURE_SIZE)
+                                                     FLAGS.FEATURE_SIZE,
+                                                     FLAGS.activation_func)
 
         # Add to the Graph the Ops for loss calculation.
         loss = models.lossdef(hidden_last, labels_placeholder_t, regularizers, FLAGS.l2_reg_para)
@@ -283,7 +284,7 @@ def main(argv):
     if not os.path.exists(FLAGS.train_dir):
         os.makedirs(FLAGS.train_dir)
 
-    if argv:
+    if len(argv) > 1:
         FLAGS.L = argv[1]
     if len(argv) > 2:
         print('Usage(): argv1: Integer, the number of layers')

@@ -13,7 +13,7 @@ FLAGS = tf.app.flags.FLAGS
 
 
 
-def inference(placeholder_tuple, hidden_units, FEATURE_SIZE):
+def inference(placeholder_tuple, hidden_units, FEATURE_SIZE, activation_func):
     """Build the multi layer neural network model up to where it may be used for inference.
 
           Args:
@@ -44,8 +44,10 @@ def inference(placeholder_tuple, hidden_units, FEATURE_SIZE):
                     name='weights')
                 biases[ll] = tf.Variable(tf.zeros([hidden_units[ll]]),
                                       name='biases')
-
-                hiddens[ll] = tf.sigmoid(tf.matmul(features_tasks, weights[ll]) + biases[ll])  # task 1 output of layer 1
+                if activation_func == 1:
+                    hiddens[ll] = tf.sigmoid(tf.matmul(features_tasks, weights[ll]) + biases[ll])  # task 1 output of layer 1
+                else:
+                    hiddens[ll] = tf.tanh(tf.matmul(features_tasks, weights[ll]) + biases[ll])  # task 1 output of layer 1
 
                 regularizers += tf.nn.l2_loss(weights[ll]) + tf.nn.l2_loss(biases[ll])
                 tf.histogram_summary("Layer" + str(ll + 1) + '/weights', weights[ll])
@@ -60,7 +62,10 @@ def inference(placeholder_tuple, hidden_units, FEATURE_SIZE):
 
                 biases[ll] = tf.Variable(tf.zeros([hidden_units[ll]]), name='biases')
 
-                hiddens[ll] = tf.sigmoid(tf.matmul(hiddens[ll-1], weights[ll]) + biases[ll])  # task 1 output of layer 1
+                if activation_func == 1:
+                    hiddens[ll] = tf.sigmoid(tf.matmul(hiddens[ll-1], weights[ll]) + biases[ll])  # task 1 output of layer 1
+                else:
+                    hiddens[ll] = tf.tanh(tf.matmul(hiddens[ll-1], weights[ll]) + biases[ll])  # task 1 output of layer 1
 
                 regularizers += tf.nn.l2_loss(weights[ll]) + tf.nn.l2_loss(biases[ll])
                 tf.histogram_summary("Layer" + str(ll + 1) + '/weights', weights[ll])

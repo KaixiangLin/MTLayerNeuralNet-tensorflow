@@ -1,5 +1,5 @@
 # MTLayerNeuralNet-tensorflow
-Multi layer fully connected neural network in tensorflow - a simple example.
+Multi layer fully connected neural network in tensorflow for arbitrary number of hidden layers - a simple example.
 
 ## Prerequisites
 ```
